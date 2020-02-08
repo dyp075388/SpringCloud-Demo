@@ -1,0 +1,40 @@
+spring:
+  application:
+    name: hystrix
+    
+server:
+  port: 3001
+  
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka1:2001/eureka,http://eureka2:2002/eureka
+
+#ribbon的重试机制的设置
+ribbon:
+  MaxAutoRetriesNextServer: 2
+  MaxAutoRetries: 1
+  OkToRetryOnAllOperations: true
+  
+#降级的时间的设置
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 500
+            
+#断路器监控actuator暴露监控端点
+management:
+  endpoints:
+    web:
+      exposure:
+        include: hystrix.stream #"*" #暴露所有的监控端点
+
+
+
+
+
+
+
