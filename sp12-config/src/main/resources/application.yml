@@ -1,0 +1,38 @@
+spring:
+  application:
+    name: config-server
+
+#连接rabbitmq
+  rabbitmq:
+    host: 192.168.75.129
+    port: 5672
+    username: admin
+    password: admin
+
+#配置连接git服务器，从中克隆配置文件（config中的配置文件）
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/dyp075388/sp-config
+          search-paths:
+# -  带哦表可以设置多个路径，也可以用 ， 把各个路径分开
+          - config
+
+server:
+  port: 6001
+ 
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka1:2001/eureka, http://eureka2:2002/eureka
+
+#为了向消息总线bus传递刷新配置信息暴露的端点配置
+management:
+  endpoints:
+    web:
+      exposure:
+        include: bus-refresh
+        
+        
+        
