@@ -3,6 +3,7 @@ package com.tedu.sp03.user.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -14,6 +15,9 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
+
+//为了刷新配置信息添加的注解(在git中修改配置文件之后,添加此注解才会更新配置)
+@RefreshScope
 public class UserServiceImpl implements UserService {
 	@Value("${sp.user-service.users}")
 	private String userJson;
